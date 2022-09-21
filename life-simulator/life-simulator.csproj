@@ -9,4 +9,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Classes\Map\" />
+    <Folder Include="Classes\Entity\" />
+  </ItemGroup>
+
 </Project>
