@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Forms;
+
 namespace life_simulator
 {
     internal static class Program
@@ -10,7 +13,13 @@ namespace life_simulator
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+#if NET6_0_OR_GREATER
             ApplicationConfiguration.Initialize();
+#else
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+#endif
             Application.Run(new Form1());
         }
     }
