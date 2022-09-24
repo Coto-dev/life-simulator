@@ -25,14 +25,16 @@ namespace life_simulator.Render {
 			}
 		}
 
-		public void setEntityCellPos(Entity ent, Vector2 ?LastPos, Vector2 NewPos) {
+		public void setEntityCellPos(Entity ent, Vector2 ?LastPos, Vector2 ?NewPos) {
 			if (LastPos != null) {
 				Vector2 LastPosToGrid = LastPos.Value / this.GridSize;
 				Cells[((uint)(LastPosToGrid.X)), ((uint)LastPosToGrid.Y)].Entities.Remove(ent);
 			}
 
-			Vector2 NewPosToGrid = NewPos / this.GridSize;
-			Cells[((uint)NewPosToGrid.X), ((uint)NewPosToGrid.Y)].Entities.Add(ent);
+			if (NewPos != null) {
+				Vector2 NewPosToGrid = NewPos.Value / this.GridSize;
+				Cells[((uint)NewPosToGrid.X), ((uint)NewPosToGrid.Y)].Entities.Add(ent);
+			}
 		}
 	}
 }
