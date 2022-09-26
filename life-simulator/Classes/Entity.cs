@@ -18,12 +18,30 @@ namespace life_simulator.Classes {
 
 		public Entity(World world) {
 			World = world;
+
+			World.AddTickEnt(this);
 		}
 
 		public void setPos(Vector2 newPos) {
 			World.setEntityCellPos(this, Pos, newPos);
 
 			Pos = newPos;
+		}
+
+		public void setVel(Vector2 newVel) {
+			Vel = newVel;
+		}
+
+		public void setSize(Vector2 newSize) {
+			Size = newSize;
+		}
+
+		public void setColor(Color newColor) {
+			Color = newColor;
+		}
+
+		public void setFreeze(bool freeze) {
+			isFreezed = freeze;
 		}
 
 		public Color getColor() {
@@ -42,8 +60,13 @@ namespace life_simulator.Classes {
 			return isFreezed;
 		}
 
+		public void Tick() {
+			if(!isFreezed)
+				this.setPos(this.getPos() + this.getVel());
+		}
+
 		public void Remove() {
-			World.setEntityCellPos(this, this.getPos(), null);
+			World.RemoveTickEnt(this);
 		}
 	}
 }
