@@ -60,7 +60,7 @@ namespace life_simulator.Classes {
 			return isFreezed;
 		}
 
-		public void Tick() {
+		public virtual void Tick() {
 			if(!isFreezed)
 				this.setPos(this.getPos() + this.getVel());
 		}

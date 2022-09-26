@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using life_simulator.Classes.abstractCreature;
+using life_simulator.Render;
 
 namespace life_simulator.Classes.Animal
 {
-    internal class Animal : Creature, IAlive
+    abstract class Animal : Creature, IAlive
     {
-        public void die()
+	
+		public Animal(World world) : base(world) {
+			Satiety = 2000;
+			Hp = 100;
+		}
+
+		public void die()
         {
-            throw new NotImplementedException();
+			Remove();
+            /*throw new NotImplementedException();*/
         }
 
         public void eat()
@@ -21,22 +30,19 @@ namespace life_simulator.Classes.Animal
 
         public bool isHungry()
         {
-            throw new NotImplementedException();
+            if (Satiety >50) return false;
+			else return true;
         }
 
         public void move()
         {
-            throw new NotImplementedException();
+			setVel(new Vector2(1, 1));
         }
 
-        public void pair<T>(T partner)
-        {
-            throw new NotImplementedException();
+        public void pair<T>(T partner){
         }
 
-        public void searchFood<T>(T food)
-        {
-            throw new NotImplementedException();
+        public void searchFood<T>(T food) {
         }
     }
     enum AnimalTypes
