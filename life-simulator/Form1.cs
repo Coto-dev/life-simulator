@@ -45,7 +45,7 @@ namespace life_simulator {
 			this.Controls.Add(PictureBox);
 			this.Size = new Size((int)windowSize.X, (int)windowSize.Y);
 
-			SceneTest.Create(World);
+			SceneAnimal.Create(World);
 
 			gpuTimer.Start();
 		}
