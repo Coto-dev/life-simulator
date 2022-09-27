@@ -35,13 +35,13 @@ namespace life_simulator.Render {
 
 		public void SetEntityCellPos(Entity ent, Vector2? LastPos, Vector2? NewPos) {
 			if (LastPos != null) {
-				Vector2 LastPosToGrid = LastPos.Value / this.GridSize;
+				Vector2 LastPosToGrid = LastPos.Value - new Vector2(0.5f);
 
 				GetCellOrNull(((uint)(LastPosToGrid.X)), ((uint)LastPosToGrid.Y))?.Entities.Remove(ent);
 			}
 
 			if (NewPos != null) {
-				Vector2 NewPosToGrid = NewPos.Value / this.GridSize;
+				Vector2 NewPosToGrid = NewPos.Value - new Vector2(0.5f);
 
 				GetCellOrNull(((uint)NewPosToGrid.X), ((uint)NewPosToGrid.Y))?.Entities.Add(ent);
 			}

@@ -24,7 +24,7 @@ namespace life_simulator {
 
 			entR.SetColor(Color.FromArgb(unchecked((int)0xffffffff)));
 			entR.SetSize(test1.Render.GetSize());
-			entR.SetSvg("assets/svg/Black_Paw.svg");
+			entR.SetSvg("assets/svg/Basketball.svg");
 			entR.Rerender();
 
 			test2.Render.SetEntityRender(entR);
@@ -32,7 +32,9 @@ namespace life_simulator {
 
 			test1.SetPos(new(4.5f, 5f));
 			test2.SetPos(new(1.5f, 1.5f));
-			test3.SetPos(new(2f, 2f));
+			test3.SetPos(new(2f));
+
+			Console.WriteLine((uint)0.5f);
 
 			//test1.setVel(new Vector2(0.1f, 0.1f));
 
