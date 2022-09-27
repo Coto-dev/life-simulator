@@ -21,7 +21,7 @@ namespace life_simulator.Plants
 			Render.SetColor(Color.Yellow);
 			Render.SetSvg("assets/svg/Plant.svg");
 			Render.Rerender();
-			random = rnd.Next(0, 150);
+			random = rnd.Next(1, 150);
 		}
 
 		override public void Tick() {
