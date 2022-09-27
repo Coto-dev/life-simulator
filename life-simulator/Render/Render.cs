@@ -22,9 +22,10 @@ namespace life_simulator.Render {
 			foreach (Entity ent in World.EntsTick) {
 				ent.Tick();
 
-				Vector2 entPos = ent.GetPos();
+				Vector2 entPos = (ent.GetPos() - new Vector2(0.5f)) * World.GridSize;
+				Vector2 entSize = ent.Render.GetSize() / 2;
 				
-				e.Graphics.DrawImage(ent.Render.Draw(), entPos.X, entPos.Y);
+				e.Graphics.DrawImage(ent.Render.Draw(), entPos.X - entSize.X, entPos.Y - entSize.Y);
 			}
 
 			World.TickTimers();
