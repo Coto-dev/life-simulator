@@ -34,17 +34,11 @@ namespace life_simulator.Render {
 		}
 
 		public void SetEntityCellPos(Entity ent, Vector2? LastPos, Vector2? NewPos) {
-			if (LastPos != null) {
-				Vector2 LastPosToGrid = LastPos.Value - new Vector2(0.5f);
+			if (LastPos != null)
+				GetCellOrNull(LastPos.Value)?.Entities.Remove(ent);
 
-				GetCellOrNull(((uint)(LastPosToGrid.X)), ((uint)LastPosToGrid.Y))?.Entities.Remove(ent);
-			}
-
-			if (NewPos != null) {
-				Vector2 NewPosToGrid = NewPos.Value - new Vector2(0.5f);
-
-				GetCellOrNull(((uint)NewPosToGrid.X), ((uint)NewPosToGrid.Y))?.Entities.Add(ent);
-			}
+			if (NewPos != null)
+				GetCellOrNull(NewPos.Value)?.Entities.Add(ent);
 		}
 
 		public Entity? FindFirstEnt<T>(Entity thisEnt){
@@ -64,11 +58,16 @@ namespace life_simulator.Render {
 			return min;
 		}
 
-		private Cell? GetCellOrNull(uint x, uint y) {
-			if (x < 0 || y < 0 || y >= Size.X || x >= Size.X)
+		private Cell? GetCellOrNull(Vector2 pos) {
+			pos -= new Vector2(0.5f);
+
+			pos.X = (float)Math.Truncate(pos.X);
+			pos.Y = (float)Math.Truncate(pos.Y);
+
+			if (pos.X < 0 || pos.Y < 0 || pos.Y >= Size.X || pos.X >= Size.X)
 				return null;
 
-			return Cells[x, y];
+			return Cells[(uint)pos.X, (uint)pos.Y];
 		}
 
 		public void AddTickEnt(Entity ent) {

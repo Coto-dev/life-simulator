@@ -31,7 +31,7 @@ namespace life_simulator {
 			test3.Render.SetEntityRender(entR);
 
 			test1.SetPos(new(4.5f, 5f));
-			test2.SetPos(new(1.5f, 1.5f));
+			test2.SetPos(new(1.49f, 1.49f));
 			test3.SetPos(new(2f));
 
 			Console.WriteLine((uint)0.5f);
