@@ -15,21 +15,23 @@ namespace life_simulator {
 			InitializeComponent();
 			AllocConsole();
 
-			PictureBox = new PictureBox();
+			System.IO.Directory.SetCurrentDirectory("../../../"); // visual fix relactive path
+
+			PictureBox = new();
 			PictureBox.Dock = DockStyle.Fill;
 			PictureBox.BackColor = Color.Black;
 
-			Vector2 Grid = new Vector2(10, 10);
-			Vector2 GridMultiplier = new Vector2(100, 100);
+			Vector2 GridMultiplier = new(100, 100);
+			Vector2 Grid = new(10, 10);
 
-			Render = new Render.Render(PictureBox);
-			World = new Render.World(Grid, GridMultiplier);
+			World = new(Grid, GridMultiplier);
+			Render = new(World);
 
-			PictureBox.Paint += new PaintEventHandler((object sender, PaintEventArgs e) => {
-				Render.drawWorld(e, World);
+			PictureBox.Paint += new((object sender, PaintEventArgs e) => {
+				Render.DrawWorld(e);
 			});
 
-			gpuTimer = new Timer();
+			gpuTimer = new();
 			gpuTimer.Interval = 16;
 			gpuTimer.Tick += (object ?sender, EventArgs e) => {
 				if (PictureBox.Image != null) {
@@ -40,10 +42,11 @@ namespace life_simulator {
 				PictureBox.Refresh();
 			};
 
-			Vector2 windowSize = Grid * GridMultiplier;
+			Vector2 windowSize = (Grid + new Vector2(0.175f, 0.4f)) * GridMultiplier;
 
 			this.Controls.Add(PictureBox);
-			this.Size = new Size((int)windowSize.X, (int)windowSize.Y);
+			this.Size = new((int)windowSize.X, (int)windowSize.Y);
+			this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
 			SceneAnimal.Create(World);
 

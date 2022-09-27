@@ -33,7 +33,7 @@ namespace life_simulator.Render {
 			}
 		}
 
-		public void setEntityCellPos(Entity ent, Vector2? LastPos, Vector2? NewPos) {
+		public void SetEntityCellPos(Entity ent, Vector2? LastPos, Vector2? NewPos) {
 			if (LastPos != null) {
 				Vector2 LastPosToGrid = LastPos.Value / this.GridSize;
 
@@ -88,7 +88,7 @@ namespace life_simulator.Render {
 			foreach (Entity ent in EntsRemove) {
 				EntsTick.Remove(ent);
 
-				this.setEntityCellPos(ent, ent.getPos(), null);
+				this.SetEntityCellPos(ent, ent.GetPos(), null);
 			}
 
 			EntsRemove.Clear();

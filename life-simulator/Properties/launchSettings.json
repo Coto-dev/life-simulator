@@ -1,7 +1,8 @@
 {
   "profiles": {
     "life-simulator": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "remoteDebugEnabled": false
     }
   }
 }
