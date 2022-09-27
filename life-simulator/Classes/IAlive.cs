@@ -1,12 +1,13 @@
-﻿using System;
+﻿using life_simulator.Classes;
+using System;
 
 interface IAlive
 {
-    void move();
-    void eat();
-    void searchFood<T>(T food);
-    bool isHungry();
-    void pair<T>(T partner);
-    void die();
+    void Move();
+    void Eat();
+    bool IsHungry();
+    void Pair<T>(T partner);
+    void Die();
+	void Chase<T>(Entity cls);
 
 }
