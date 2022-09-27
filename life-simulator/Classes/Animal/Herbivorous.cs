@@ -9,7 +9,8 @@ using System.Drawing;
 namespace life_simulator.Classes.Animal {
 	internal class Herbivorous : Animal {
 		public Herbivorous(World world) : base(world) {
-			Color = Color.Green;
+			Render.SetColor(Color.Green);
+			Render.Rerender();
 		}
 	}
 }

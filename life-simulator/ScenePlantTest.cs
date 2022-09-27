@@ -12,6 +12,7 @@ using life_simulator.Plants;
 namespace life_simulator {
 	class ScenePlantTest : Scene {
 
+		Random random = new Random();
 		private static double ToRadians(double angle) {
 			return (Math.PI / 180) * angle;
 		}
@@ -47,9 +48,12 @@ namespace life_simulator {
 			//test1.setVel(new Vector2(0.1f, 0.1f));
 
 			TickTimer tmr = new(world, (uint ticks) => {
-
+				Vector2 spawnPosition = new((float)random.NextDouble() * World.Size.X, (float)random.NextDouble() * World.Size.Y);
+				if (World.IsCellEmpty(spawnPosition)) {
+					(new Plant(world)).SetPos(spawnPosition);
+				}
 				//Console.WriteLine(test1.getPos());
-			}, 1, 0);
+			}, 60, 0);
 		}
 
 		public new static ScenePlantTest Create(World world) {

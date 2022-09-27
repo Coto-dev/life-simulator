@@ -18,14 +18,14 @@ namespace life_simulator.Classes.Animal {
 
 				if (ent is Herbivorous) {
 					Console.WriteLine(ent.GetType());
-					Console.WriteLine(ent.getPos());
+					Console.WriteLine(ent.GetPos());
 				}
 			}
 			
 		}
 		public Predator(World world) : base(world) {
-			Color = Color.White;
-		
+			Render.SetColor(Color.White);
+			Render.Rerender();
 		}
 	}
 }

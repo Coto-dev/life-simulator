@@ -23,18 +23,18 @@ namespace life_simulator {
 			Herbivorous test5 = new Herbivorous(world);
 			Herbivorous test6 = new Herbivorous(world);
 
-			test1.setPos(new Vector2(200, 500));
-			test2.setPos(new Vector2(100, 100));
-			test3.setPos(new Vector2(150, 150));
-			test4.setPos(new Vector2(150, 150));
-			test6.setPos(new Vector2(170, 150));
+			test1.SetPos(new Vector2(200, 500));
+			test2.SetPos(new Vector2(100, 100));
+			test3.SetPos(new Vector2(150, 150));
+			test4.SetPos(new Vector2(150, 150));
+			test6.SetPos(new Vector2(170, 150));
 			test4.move();
 			test5.move();
 			test6.move();
 			//test1.setVel(new Vector2(0.1f, 0.1f));
 
 			TickTimer tmr = new TickTimer(world, (uint ticks) => {
-				test1.setVel(new Vector2(
+				test1.SetVel(new Vector2(
 					(float)Math.Sin(ToRadians(ticks % 360)),
 					(float)Math.Cos(ToRadians(ticks % 360))) * 2f
 				);

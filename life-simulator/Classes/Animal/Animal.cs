@@ -36,7 +36,7 @@ namespace life_simulator.Classes.Animal
 
         public void move()
         {
-			setVel(new Vector2(1, 1));
+			SetVel(new Vector2(1, 1));
         }
 
         public void pair<T>(T partner){
