@@ -13,17 +13,20 @@ namespace life_simulator.Plants
     {
         public bool isEdible;
         public bool isGrown;
+		public int random;
+		Random rnd = new Random();
 
 		public Plant(World world) : base(world) {
 			isFreezed = true;
 			Render.SetColor(Color.Yellow);
 			Render.SetSvg("assets/svg/Plant.svg");
 			Render.Rerender();
+			random = rnd.Next(0, 150);
 		}
 
 		override public void Tick() {
 			base.Tick();
-			if (Ticks == 100) {
+			if (Ticks == random) {
 				grow();
 				Console.WriteLine(Ticks);
 			}

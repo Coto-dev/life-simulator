@@ -48,7 +48,7 @@ namespace life_simulator {
 			this.ClientSize = new((int)windowSize.X, (int)windowSize.Y);
 			this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
-			SceneRenderTest.Create(World);
+			ScenePlantTest.Create(World);
 
 			gpuTimer.Start();
 		}
@@ -56,5 +56,9 @@ namespace life_simulator {
 		[DllImport("kernel32.dll", SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		static extern bool AllocConsole();
+
+		private void Form1_Load(object sender, EventArgs e) {
+
+		}
 	}
 }
