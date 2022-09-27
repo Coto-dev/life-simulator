@@ -16,6 +16,7 @@ namespace life_simulator.Classes {
 		protected Vector2 Vel = new(0, 0);
 		protected bool isFreezed = false;
 		protected World World;
+		protected uint Ticks = 0;
 
 		public Entity(World world) {
 			World = world;
@@ -27,36 +28,38 @@ namespace life_simulator.Classes {
 			Render.Rerender();
 		}
 
-		public void SetPos(Vector2 newPos) {
+		public virtual void SetPos(Vector2 newPos) {
 			World.SetEntityCellPos(this, Pos, newPos);
 
 			Pos = newPos;
 		}
 
-		public void SetVel(Vector2 newVel) {
+		public virtual void SetVel(Vector2 newVel) {
 			Vel = newVel;
 		}
 
-		public void SetFreeze(bool freeze) {
+		public virtual void SetFreeze(bool freeze) {
 			isFreezed = freeze;
 		}
 		
-		public Vector2 GetPos() {
+		public virtual Vector2 GetPos() {
 			return Pos;
 		}
-		public Vector2 GetVel() {
+		public virtual Vector2 GetVel() {
 			return Vel;
 		}
-		public bool GetFreeze() {
+		public virtual bool GetFreeze() {
 			return isFreezed;
 		}
 
 		public virtual void Tick() {
 			if(!isFreezed)
 				this.SetPos(this.GetPos() + this.GetVel());
+
+			Ticks++;
 		}
 
-		public void Remove() {
+		public virtual void Remove() {
 			World.RemoveTickEnt(this);
 		}
 	}
