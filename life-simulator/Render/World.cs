@@ -47,6 +47,23 @@ namespace life_simulator.Render {
 			}
 		}
 
+		public Entity? FindFirstEnt<T>(Entity thisEnt){
+			Entity? min = null;
+
+			foreach (var ent in EntsTick) {
+				if (ent is T) {
+					if (min != null) {
+						if ((ent.GetPos() - thisEnt.GetPos()).Length() < (min.GetPos() - thisEnt.GetPos()).Length()) {
+							min = ent;
+						}
+					} else
+						min = ent;
+				}
+			}
+
+			return min;
+		}
+
 		private Cell? GetCellOrNull(uint x, uint y) {
 			if (x < 0 || y < 0 || y >= Size.X || x >= Size.X)
 				return null;
