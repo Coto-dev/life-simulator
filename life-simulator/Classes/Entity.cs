@@ -12,51 +12,54 @@ namespace life_simulator.Classes {
 	public class Entity {
 		public EntityRender Render { get; } = new();
 
-		protected Vector2 Pos = new(0, 0);
-		protected Vector2 Vel = new(0, 0);
+		protected Vector2 Pos = new(1f);
+		protected Vector2 Vel = new(0f);
 		protected bool isFreezed = false;
 		protected World World;
+		protected uint Ticks = 0;
 
 		public Entity(World world) {
 			World = world;
 			World.AddTickEnt(this);
 
 			Render.SetColor(Color.FromArgb(unchecked((int)0xffff0000)));
-			Render.SetSize(new Vector2(20, 20));
+			Render.SetSize(World.GridSize / 2);
 			Render.SetSvg("assets/svg/Debug.svg");
 			Render.Rerender();
 		}
 
-		public void SetPos(Vector2 newPos) {
+		public virtual void SetPos(Vector2 newPos) {
 			World.SetEntityCellPos(this, Pos, newPos);
 
 			Pos = newPos;
 		}
 
-		public void SetVel(Vector2 newVel) {
+		public virtual void SetVel(Vector2 newVel) {
 			Vel = newVel;
 		}
 
-		public void SetFreeze(bool freeze) {
+		public virtual void SetFreeze(bool freeze) {
 			isFreezed = freeze;
 		}
 		
-		public Vector2 GetPos() {
+		public virtual Vector2 GetPos() {
 			return Pos;
 		}
-		public Vector2 GetVel() {
+		public virtual Vector2 GetVel() {
 			return Vel;
 		}
-		public bool GetFreeze() {
+		public virtual bool GetFreeze() {
 			return isFreezed;
 		}
 
-		public void Tick() {
+		public virtual void Tick() {
 			if(!isFreezed)
 				this.SetPos(this.GetPos() + this.GetVel());
+
+			Ticks++;
 		}
 
-		public void Remove() {
+		public virtual void Remove() {
 			World.RemoveTickEnt(this);
 		}
 	}
