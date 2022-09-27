@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Svg;
 using System.Numerics;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace life_simulator.Classes {
 	public class EntityRender {
@@ -51,6 +53,32 @@ namespace life_simulator.Classes {
 			Img = SvgDocument.Open(Path);
 		}
 
+		public void SetImg(string Path) {
+			Img = Image.FromFile(Path);
+		}
+
+		private static Bitmap ResizeImage(Image image, int width, int height) {
+			var destRect = new Rectangle(0, 0, width, height);
+			var destImage = new Bitmap(width, height);
+
+			destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+			using (var graphics = Graphics.FromImage(destImage)) {
+				graphics.CompositingMode = CompositingMode.SourceCopy;
+				graphics.CompositingQuality = CompositingQuality.HighQuality;
+				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+				graphics.SmoothingMode = SmoothingMode.HighQuality;
+				graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+				using (var wrapMode = new ImageAttributes()) {
+					wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+					graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+				}
+			}
+
+			return destImage;
+		}
+
 		public void Rerender() {
 			if (Bitmap != null)
 				Bitmap.Dispose();
@@ -58,6 +86,8 @@ namespace life_simulator.Classes {
 			if (Img is SvgDocument svgDocument) {
 				svgDocument.Fill = new SvgColourServer(Color);
 				Bitmap = svgDocument.Draw((int)Size.X, (int)Size.Y);
+			} else if (Img is Image image) {
+				Bitmap = ResizeImage(image, (int)Size.X, (int)Size.Y);
 			} else if (Img is Bitmap bitmap) {
 				Bitmap = bitmap;
 			} else if (Img is null) {
