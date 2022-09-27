@@ -6,63 +6,54 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Numerics;
 using life_simulator.Render;
+using Svg;
 
 namespace life_simulator.Classes {
 	public class Entity {
-		protected Color Color = Color.FromArgb(255, 255, 0, 0);
-		protected Vector2 Size = new Vector2(5, 5);
-		protected Vector2 Pos = new Vector2(0, 0);
-		protected Vector2 Vel = new Vector2(0, 0);
+		public EntityRender Render { get; } = new();
+
+		protected Vector2 Pos = new(0, 0);
+		protected Vector2 Vel = new(0, 0);
 		protected bool isFreezed = false;
 		protected World World;
 
 		public Entity(World world) {
 			World = world;
-
 			World.AddTickEnt(this);
+
+			Render.SetColor(Color.FromArgb(unchecked((int)0xffff0000)));
+			Render.SetSize(new Vector2(20, 20));
+			Render.SetSvg("assets/svg/Debug.svg");
+			Render.Rerender();
 		}
 
-		public void setPos(Vector2 newPos) {
-			World.setEntityCellPos(this, Pos, newPos);
+		public void SetPos(Vector2 newPos) {
+			World.SetEntityCellPos(this, Pos, newPos);
 
 			Pos = newPos;
 		}
 
-		public void setVel(Vector2 newVel) {
+		public void SetVel(Vector2 newVel) {
 			Vel = newVel;
 		}
 
-		public void setSize(Vector2 newSize) {
-			Size = newSize;
-		}
-
-		public void setColor(Color newColor) {
-			Color = newColor;
-		}
-
-		public void setFreeze(bool freeze) {
+		public void SetFreeze(bool freeze) {
 			isFreezed = freeze;
 		}
-
-		public Color getColor() {
-			return Color;
-		}
-		public Vector2 getSize() {
-			return Size;
-		}
-		public Vector2 getPos() {
+		
+		public Vector2 GetPos() {
 			return Pos;
 		}
-		public Vector2 getVel() {
+		public Vector2 GetVel() {
 			return Vel;
 		}
-		public bool getFreeze() {
+		public bool GetFreeze() {
 			return isFreezed;
 		}
 
 		public virtual void Tick() {
 			if(!isFreezed)
-				this.setPos(this.getPos() + this.getVel());
+				this.SetPos(this.GetPos() + this.GetVel());
 		}
 
 		public void Remove() {

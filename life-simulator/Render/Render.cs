@@ -10,30 +10,38 @@ using life_simulator.Classes;
 
 namespace life_simulator.Render {
 	public class Render {
-		public Render(PictureBox pictureBox) {
-			
+		public World World;
+
+		public Render(World world) {
+			World = world;
 		}
 
-		internal void drawWorld(PaintEventArgs e, World world) {
-			foreach (Entity ent in world.EntsTick) {
+		internal void DrawWorld(PaintEventArgs e) {
+			DrawGrid(e);
+
+			foreach (Entity ent in World.EntsTick) {
 				ent.Tick();
 
-				Pen entPen = new Pen(ent.getColor(), 3);
-				Vector2 entPos = ent.getPos();
-				Vector2 entSizeD2 = ent.getSize() / 2;
-
-				e.Graphics.DrawRectangle(entPen,
-						entPos.X - entSizeD2.X,
-						entPos.Y - entSizeD2.Y,
-						entSizeD2.X,
-						entSizeD2.Y);
-
-				entPen.Dispose();
+				Vector2 entPos = ent.GetPos();
+				
+				e.Graphics.DrawImage(ent.Render.Draw(), entPos.X, entPos.Y);
 			}
 
-			world.TickTimers();
-			world.RemoveOldEnts();
-			world.RemoveOldTimer();
+			World.TickTimers();
+			World.RemoveOldEnts();
+			World.RemoveOldTimer();
+		}
+
+		internal void DrawGrid(PaintEventArgs e) {
+			Pen gridPen = new(Color.FromArgb(unchecked((int)0xff888888)), 1);
+
+			for (int i = 0; i <= (int)World.Size.X; i++)
+				e.Graphics.DrawLine(gridPen, i * World.GridSize.X, 0, i * World.GridSize.X, World.Size.Y * World.GridSize.Y);
+
+			for (int i = 0; i <= (int)World.Size.Y; i++)
+				e.Graphics.DrawLine(gridPen, 0, i * World.GridSize.Y, World.Size.X * World.GridSize.X, i * World.GridSize.Y);
+
+			gridPen.Dispose();
 		}
 	}
 }
