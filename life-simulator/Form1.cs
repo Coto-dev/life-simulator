@@ -42,10 +42,10 @@ namespace life_simulator {
 				PictureBox.Refresh();
 			};
 
-			Vector2 windowSize = (Grid + new Vector2(0.175f, 0.4f)) * GridMultiplier;
+			Vector2 windowSize = Grid * GridMultiplier + new Vector2(1f);
 
 			this.Controls.Add(PictureBox);
-			this.Size = new((int)windowSize.X, (int)windowSize.Y);
+			this.ClientSize = new((int)windowSize.X, (int)windowSize.Y);
 			this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
 			SceneAnimal.Create(World);

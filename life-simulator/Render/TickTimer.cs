@@ -22,7 +22,7 @@ namespace life_simulator.Render {
 			World.AddTickTimer(this);
 		}
 
-		public void Tick() {
+		public virtual void Tick() {
 			TicksCount++;
 
 			if (++Ticks >= TickItr) {
@@ -37,7 +37,7 @@ namespace life_simulator.Render {
 			}
 		}
 
-		public void Destroy() {
+		public virtual void Destroy() {
 			World.RemoveTickTimer(this);
 		}
 	}

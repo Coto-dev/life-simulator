@@ -49,7 +49,6 @@ namespace life_simulator.Classes {
 
 		public void SetSvg(string Path) {
 			Img = SvgDocument.Open(Path);
-			((SvgDocument)Img).Fill = new SvgColourServer(Color);
 		}
 
 		public void Rerender() {
@@ -57,6 +56,7 @@ namespace life_simulator.Classes {
 				Bitmap.Dispose();
 
 			if (Img is SvgDocument svgDocument) {
+				svgDocument.Fill = new SvgColourServer(Color);
 				Bitmap = svgDocument.Draw((int)Size.X, (int)Size.Y);
 			} else if (Img is Bitmap bitmap) {
 				Bitmap = bitmap;

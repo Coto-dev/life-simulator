@@ -30,9 +30,9 @@ namespace life_simulator {
 			test2.Render.SetEntityRender(entR);
 			test3.Render.SetEntityRender(entR);
 
-			test1.SetPos(new(200, 500));
-			test2.SetPos(new(100, 100));
-			test3.SetPos(new(150, 150));
+			test1.SetPos(new(4.5f, 5f));
+			test2.SetPos(new(1.5f, 1.5f));
+			test3.SetPos(new(2f, 2f));
 
 			//test1.setVel(new Vector2(0.1f, 0.1f));
 
@@ -43,7 +43,7 @@ namespace life_simulator {
 
 				test1.SetVel(new Vector2(
 					(float)Math.Sin(ToRadians(ticks % 360)),
-					(float)Math.Cos(ToRadians(ticks % 360))) * 2f * mult
+					(float)Math.Cos(ToRadians(ticks % 360))) * 0.02f * mult
 				);
 
 				//Console.WriteLine(test1.getPos());
