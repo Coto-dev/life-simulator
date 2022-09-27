@@ -47,6 +47,7 @@ namespace life_simulator {
 			this.Controls.Add(PictureBox);
 			this.ClientSize = new((int)windowSize.X, (int)windowSize.Y);
 			this.FormBorderStyle = FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
 
 			ScenePlantTest.Create(World);
 
