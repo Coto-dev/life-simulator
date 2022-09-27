@@ -12,8 +12,8 @@ namespace life_simulator.Classes {
 	public class Entity {
 		public EntityRender Render { get; } = new();
 
-		protected Vector2 Pos = new(0, 0);
-		protected Vector2 Vel = new(0, 0);
+		protected Vector2 Pos = new(1f);
+		protected Vector2 Vel = new(0f);
 		protected bool isFreezed = false;
 		protected World World;
 		protected uint Ticks = 0;
@@ -23,7 +23,7 @@ namespace life_simulator.Classes {
 			World.AddTickEnt(this);
 
 			Render.SetColor(Color.FromArgb(unchecked((int)0xffff0000)));
-			Render.SetSize(new Vector2(20, 20));
+			Render.SetSize(World.GridSize / 2);
 			Render.SetSvg("assets/svg/Debug.svg");
 			Render.Rerender();
 		}
