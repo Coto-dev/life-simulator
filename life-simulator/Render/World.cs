@@ -41,11 +41,11 @@ namespace life_simulator.Render {
 				GetCellOrNull(NewPos.Value)?.Entities.Add(ent);
 		}
 
-		public Entity? FindFirstEnt<T>(Entity thisEnt){
+		public Entity? FindFirstEnt<T1, T2>(Entity thisEnt){
 			Entity? min = null;
 
 			foreach (var ent in EntsTick) {
-				if (ent is T) {
+				if (ent is T1 || ent is T2) {
 					if (min != null) {
 						if ((ent.GetPos() - thisEnt.GetPos()).Length() < (min.GetPos() - thisEnt.GetPos()).Length()) {
 							min = ent;

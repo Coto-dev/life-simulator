@@ -1,4 +1,5 @@
 ﻿using life_simulator.Render;
+using life_simulator.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +15,10 @@ namespace life_simulator.Classes.Animal {
 			Render.SetColor(Color.Orange);
 			Render.Rerender();
 		}
+
 		public override void Tick() {
 			base.Tick();
-			Satiety-- ;
-
-			if (Hp == 0) 
-				Die();
-			
-			if (IsHungry()) {
-				Hp--;
-				Chase<Herbivorous>(this);
-			} 
-			else {
-				if (Hp < MaxHp) 
-					Hp++;
-				Move();
-			}
+			Live<Herbivorous, Human>();
 		}		
 	}
 }

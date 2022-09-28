@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 using System.Drawing;
 
 namespace life_simulator.Classes.Animal {
-	internal class Herbivorous : Animal {
-		public Herbivorous(World world) : base(world) {
-			Render.SetSvg("assets/svg/Herbivorous.svg");
-			Render.SetColor(Color.Green);
+	internal class Human : Animal {
+		public Human(World world) : base(world) {
+			Render.SetSvg("assets/svg/Human.svg");
+			Render.SetColor(Color.White);
 			Render.Rerender();
-			SpeedCoof = 20;
+			Hp = 300;
 		}
 
 		public override void Tick() {
 			base.Tick();
-			Live<Plant, Plant>();
+			Live<Herbivorous, Predator>();
 		}
 	}
 }

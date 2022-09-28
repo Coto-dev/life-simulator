@@ -13,12 +13,38 @@ using System.Drawing;
 namespace life_simulator {
 	class SceneAnimal : Scene {
 
+		Random random = new Random();
+
 		private double ToRadians(double angle) {
 			return (Math.PI / 180) * angle;
 		}
 
+		private void RandomSpawnPredator(World world) {
+			(new Predator(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
+			(float)Math.Round(random.NextDouble() * World.Size.Y)));
+		}
+
+		private void RandomSpawnHerbivorous(World world) {
+			(new Herbivorous(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
+			(float)Math.Round(random.NextDouble() * World.Size.Y)));
+		}
+
+		private void RandomSpawnHuman(World world) {
+			(new Human(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
+			(float)Math.Round(random.NextDouble() * World.Size.Y)));
+		}
+
+		private void RandomSpawnPlant(World world) {
+			Vector2 spawnPosition = new(
+					(float)Math.Round(random.NextDouble() * World.Size.X),
+					(float)Math.Round(random.NextDouble() * World.Size.Y)
+				);
+			if (World.IsCellEmpty(spawnPosition)) 
+					(new Plant(world)).SetPos(spawnPosition);
+		}
+
 		public SceneAnimal(World world) : base(world) {
-			Random random = new Random();
+			
 
 			Predator predator1 = new Predator(world);
 			Predator predator2 = new Predator(world);
@@ -41,20 +67,12 @@ namespace life_simulator {
 			herbivorous5.SetPos(new Vector2(4.7f, 3.5f));
 
 			TickTimer tmr = new(world, (uint ticks) => {
-				Vector2 spawnPosition = new(
-					(float)Math.Round(random.NextDouble() * World.Size.X),
-					(float)Math.Round(random.NextDouble() * World.Size.Y)
-				);
-
-				if (World.IsCellEmpty(spawnPosition)) 
-					(new Plant(world)).SetPos(spawnPosition);
-
-					(new Predator(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
-					(float)Math.Round(random.NextDouble() * World.Size.Y)));
-				(new Herbivorous(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
-				(float)Math.Round(random.NextDouble() * World.Size.Y)));
-				(new Herbivorous(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
-				(float)Math.Round(random.NextDouble() * World.Size.Y)));
+				RandomSpawnPlant(world);
+				RandomSpawnPlant(world);
+				RandomSpawnHuman(world);
+				RandomSpawnHerbivorous(world);
+				RandomSpawnHerbivorous(world);
+				RandomSpawnPredator(world);
 			}, 60, 0);
 
 		}
