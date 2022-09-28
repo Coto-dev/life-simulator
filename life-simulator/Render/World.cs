@@ -58,6 +58,14 @@ namespace life_simulator.Render {
 			return min;
 		}
 
+		public bool IsCellEmpty(Vector2 Coords) {
+			Cell? result = GetCellOrNull(Coords);
+			if (result == null) {
+				return true;
+			}
+			return result.Entities.Count == 0;
+		}
+
 		private Cell? GetCellOrNull(Vector2 pos) {
 			pos -= new Vector2(0.5f);
 
