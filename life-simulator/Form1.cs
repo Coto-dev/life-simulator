@@ -1,8 +1,8 @@
-using System.Drawing;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Numerics;
 using System;
+using System.Drawing;
+using System.Numerics;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace life_simulator {
 	public partial class Form1 : Form {
@@ -12,50 +12,50 @@ namespace life_simulator {
 		public Render.World World { get; }
 		private PictureBox PictureBox { get; }
 		public Form1() {
-			InitializeComponent();
+			this.InitializeComponent();
 			AllocConsole();
 
 			System.IO.Directory.SetCurrentDirectory("../../../"); // visual fix relactive path
 
-			PictureBox = new();
-			PictureBox.Dock = DockStyle.Fill;
-			PictureBox.BackColor = Color.Black;
+			this.PictureBox = new();
+			this.PictureBox.Dock = DockStyle.Fill;
+			this.PictureBox.BackColor = Color.Black;
 
 			Vector2 GridMultiplier = new(100, 100);
 			Vector2 Grid = new(10, 10);
 
-			World = new(Grid, GridMultiplier);
-			Render = new(World);
+			this.World = new(Grid, GridMultiplier);
+			this.Render = new(this.World);
 
-			PictureBox.Paint += new((object sender, PaintEventArgs e) => {
-				Render.DrawWorld(e);
+			this.PictureBox.Paint += new((object sender, PaintEventArgs e) => {
+				this.Render.DrawWorld(e);
 			});
 
-			gpuTimer = new();
-			gpuTimer.Interval = 16;
-			gpuTimer.Tick += (object ?sender, EventArgs e) => {
-				if (PictureBox.Image != null) {
-					PictureBox.Image.Dispose();
-					PictureBox.Image = null;
+			this.gpuTimer = new();
+			this.gpuTimer.Interval = 16;
+			this.gpuTimer.Tick += (object? sender, EventArgs e) => {
+				if (this.PictureBox.Image != null) {
+					this.PictureBox.Image.Dispose();
+					this.PictureBox.Image = null;
 				}
 
-				PictureBox.Refresh();
+				this.PictureBox.Refresh();
 			};
 
 			Vector2 windowSize = Grid * GridMultiplier + new Vector2(1f);
 
-			this.Controls.Add(PictureBox);
+			this.Controls.Add(this.PictureBox);
 			this.ClientSize = new((int)windowSize.X, (int)windowSize.Y);
 			this.FormBorderStyle = FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 
 
-			SceneAnimal.Create(World);
+			SceneAnimal.Create(this.World);
 
 			//ScenePlantTest.Create(World);
 
 
-			gpuTimer.Start();
+			this.gpuTimer.Start();
 		}
 
 		[DllImport("kernel32.dll", SetLastError = true)]

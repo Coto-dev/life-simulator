@@ -23,10 +23,10 @@ dotnet_sort_system_directives_first = false
 file_header_template = unset
 
 # this. and Me. preferences
-dotnet_style_qualification_for_event = false
-dotnet_style_qualification_for_field = false
-dotnet_style_qualification_for_method = false
-dotnet_style_qualification_for_property = false
+dotnet_style_qualification_for_event = true
+dotnet_style_qualification_for_field = true
+dotnet_style_qualification_for_method = true
+dotnet_style_qualification_for_property = true
 
 # Language keywords vs BCL types preferences
 dotnet_style_predefined_type_for_locals_parameters_members = true
@@ -104,7 +104,7 @@ csharp_prefer_static_local_function = true
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
 
 # Code-block preferences
-csharp_prefer_braces = true
+csharp_prefer_braces = when_multiline
 csharp_prefer_simple_using_statement = true
 
 # Expression-level preferences
@@ -125,7 +125,7 @@ csharp_using_directive_placement = outside_namespace
 # New line preferences
 csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true
 csharp_style_allow_blank_lines_between_consecutive_braces_experimental = true
-csharp_style_allow_embedded_statements_on_same_line_experimental = true
+csharp_style_allow_embedded_statements_on_same_line_experimental = false
 
 #### C# Formatting Rules ####
 

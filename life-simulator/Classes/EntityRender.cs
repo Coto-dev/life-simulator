@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Svg;
 using System.Drawing;
-using Svg;
-using System.Numerics;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Numerics;
 
 namespace life_simulator.Classes {
 	public class EntityRender {
@@ -18,91 +13,92 @@ namespace life_simulator.Classes {
 		protected object? Img;
 
 		public EntityRender() {
-			Rerender();
+			this.Rerender();
 		}
 
 		public void SetSize(Vector2 newSize) {
-			Size = newSize;
+			this.Size = newSize;
 		}
 		public void SetColor(Color newColor) {
-			Color = newColor;
+			this.Color = newColor;
 		}
 		public void SetThickness(int newThickness) {
-			Thickness = newThickness;
+			this.Thickness = newThickness;
 		}
 
 		public Color GetColor() {
-			return Color;
+			return this.Color;
 		}
 		public Vector2 GetSize() {
-			return Size;
+			return this.Size;
 		}
 		public int GetThickness() {
-			return Thickness;
+			return this.Thickness;
 		}
 
 		public void SetEntityRender(EntityRender entR) {
-			Thickness = entR.Thickness;
-			Color = entR.Color;
-			Size = entR.Size;
-			Bitmap = entR.Bitmap;
-			Img = entR.Img;
+			this.Thickness = entR.Thickness;
+			this.Color = entR.Color;
+			this.Size = entR.Size;
+			this.Bitmap = entR.Bitmap;
+			this.Img = entR.Img;
 		}
 
 		public void SetSvg(string Path) {
-			Img = SvgDocument.Open(Path);
+			this.Img = SvgDocument.Open(Path);
 		}
 
 		public void SetImg(string Path) {
-			Img = Image.FromFile(Path);
+			this.Img = Image.FromFile(Path);
 		}
 
 		private static Bitmap ResizeImage(Image image, int width, int height) {
-			var destRect = new Rectangle(0, 0, width, height);
-			var destImage = new Bitmap(width, height);
+			Rectangle destRect = new(0, 0, width, height);
+			Bitmap? destImage = new(width, height);
 
 			destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
-			using (var graphics = Graphics.FromImage(destImage)) {
+			using (Graphics? graphics = Graphics.FromImage(destImage)) {
 				graphics.CompositingMode = CompositingMode.SourceCopy;
 				graphics.CompositingQuality = CompositingQuality.HighQuality;
 				graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
 				graphics.SmoothingMode = SmoothingMode.HighQuality;
 				graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-				using (var wrapMode = new ImageAttributes()) {
-					wrapMode.SetWrapMode(WrapMode.TileFlipXY);
-					graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
-				}
+				using ImageAttributes? wrapMode = new();
+
+				wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+				graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
 			}
 
 			return destImage;
 		}
 
 		public void Rerender() {
-			if (Bitmap != null)
-				Bitmap.Dispose();
+			if (this.Bitmap != null) {
+				this.Bitmap.Dispose();
+			}
 
-			if (Img is SvgDocument svgDocument) {
-				svgDocument.Fill = new SvgColourServer(Color);
-				Bitmap = svgDocument.Draw((int)Size.X, (int)Size.Y);
-			} else if (Img is Image image) {
-				Bitmap = ResizeImage(image, (int)Size.X, (int)Size.Y);
-			} else if (Img is Bitmap bitmap) {
-				Bitmap = bitmap;
-			} else if (Img is null) {
-				Bitmap = new Bitmap((int)Size.X, (int)Size.Y);
+			if (this.Img is SvgDocument svgDocument) {
+				svgDocument.Fill = new SvgColourServer(this.Color);
+				this.Bitmap = svgDocument.Draw((int)this.Size.X, (int)this.Size.Y);
+			} else if (this.Img is Image image) {
+				this.Bitmap = ResizeImage(image, (int)this.Size.X, (int)this.Size.Y);
+			} else if (this.Img is Bitmap bitmap) {
+				this.Bitmap = bitmap;
+			} else if (this.Img is null) {
+				this.Bitmap = new Bitmap((int)this.Size.X, (int)this.Size.Y);
 
-				Pen entPen = new(Color, Thickness);
-					Graphics Graphics = Graphics.FromImage(Bitmap);
-						Graphics.DrawRectangle(entPen, 0, 0, Size.X, Size.Y);
-					Graphics.Dispose();
+				Pen entPen = new(this.Color, this.Thickness);
+				Graphics Graphics = Graphics.FromImage(this.Bitmap);
+				Graphics.DrawRectangle(entPen, 0, 0, this.Size.X, this.Size.Y);
+				Graphics.Dispose();
 				entPen.Dispose();
 			}
 		}
 
 		public Bitmap Draw() {
-			return Bitmap!;
+			return this.Bitmap!;
 		}
 	}
 }

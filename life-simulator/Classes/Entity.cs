@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using life_simulator.Render;
 using System.Drawing;
 using System.Numerics;
-using life_simulator.Render;
-using Svg;
 
 namespace life_simulator.Classes {
 	public class Entity {
@@ -19,48 +13,49 @@ namespace life_simulator.Classes {
 		protected uint Ticks = 0;
 
 		public Entity(World world) {
-			World = world;
-			World.AddTickEnt(this);
+			this.World = world;
+			this.World.AddTickEnt(this);
 
-			Render.SetColor(Color.FromArgb(unchecked((int)0xffff0000)));
-			Render.SetSize(World.GridSize / 2);
-			Render.SetSvg("assets/svg/Debug.svg");
-			Render.Rerender();
+			this.Render.SetColor(Color.FromArgb(unchecked((int)0xffff0000)));
+			this.Render.SetSize(this.World.GridSize / 2);
+			this.Render.SetSvg("assets/svg/Debug.svg");
+			this.Render.Rerender();
 		}
 
 		public virtual void SetPos(Vector2 newPos) {
-			World.SetEntityCellPos(this, Pos, newPos);
+			this.World.SetEntityCellPos(this, this.Pos, newPos);
 
-			Pos = newPos;
+			this.Pos = newPos;
 		}
 
 		public virtual void SetVel(Vector2 newVel) {
-			Vel = newVel;
+			this.Vel = newVel;
 		}
 
 		public virtual void SetFreeze(bool freeze) {
-			isFreezed = freeze;
+			this.isFreezed = freeze;
 		}
-		
+
 		public virtual Vector2 GetPos() {
-			return Pos;
+			return this.Pos;
 		}
 		public virtual Vector2 GetVel() {
-			return Vel;
+			return this.Vel;
 		}
 		public virtual bool GetFreeze() {
-			return isFreezed;
+			return this.isFreezed;
 		}
 
 		public virtual void Tick() {
-			if(!isFreezed)
+			if (!this.isFreezed) {
 				this.SetPos(this.GetPos() + this.GetVel());
+			}
 
-			Ticks++;
+			this.Ticks++;
 		}
 
 		public virtual void Remove() {
-			World.RemoveTickEnt(this);
+			this.World.RemoveTickEnt(this);
 		}
 	}
 }

@@ -20,11 +20,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Classes\Map\" />
-    <Folder Include="Classes\Entity\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Svg" Version="3.4.3" />
   </ItemGroup>
 

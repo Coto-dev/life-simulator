@@ -1,10 +1,7 @@
-﻿using System;
+﻿using life_simulator.Classes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
-using life_simulator.Classes;
 
 namespace life_simulator.Render {
 	public class World {
@@ -17,41 +14,44 @@ namespace life_simulator.Render {
 		public List<TickTimer> TimersRemove { get; }
 
 		public World(Vector2 size, Vector2 gridSize) {
-			EntsRemove = new List<Entity>();
-			EntsTick = new List<Entity>();
-			TimersRemove = new List<TickTimer>();
-			TimersTick = new List<TickTimer>();
-			GridSize = gridSize;
-			Size = size;
+			this.EntsRemove = new List<Entity>();
+			this.EntsTick = new List<Entity>();
+			this.TimersRemove = new List<TickTimer>();
+			this.TimersTick = new List<TickTimer>();
+			this.GridSize = gridSize;
+			this.Size = size;
 
-			Cells = new Cell[((uint)size.X), ((uint)size.Y)];
+			this.Cells = new Cell[((uint)size.X), ((uint)size.Y)];
 
 			for (uint x = 0; x < ((uint)size.X); x++) {
 				for (uint y = 0; y < ((uint)size.Y); y++) {
-					Cells[x, y] = new Cell(new Vector2(x, y));
+					this.Cells[x, y] = new Cell(new Vector2(x, y));
 				}
 			}
 		}
 
 		public void SetEntityCellPos(Entity ent, Vector2? LastPos, Vector2? NewPos) {
-			if (LastPos != null)
-				GetCellOrNull(LastPos.Value)?.Entities.Remove(ent);
+			if (LastPos != null) {
+				this.GetCellOrNull(LastPos.Value)?.Entities.Remove(ent);
+			}
 
-			if (NewPos != null)
-				GetCellOrNull(NewPos.Value)?.Entities.Add(ent);
+			if (NewPos != null) {
+				this.GetCellOrNull(NewPos.Value)?.Entities.Add(ent);
+			}
 		}
 
-		public Entity? FindFirstEnt<T1, T2>(Entity thisEnt){
+		public Entity? FindFirstEnt<T1, T2>(Entity thisEnt) {
 			Entity? min = null;
 
-			foreach (var ent in EntsTick) {
+			foreach (Entity? ent in this.EntsTick) {
 				if (ent is T1 || ent is T2) {
 					if (min != null) {
 						if ((ent.GetPos() - thisEnt.GetPos()).Length() < (min.GetPos() - thisEnt.GetPos()).Length()) {
 							min = ent;
 						}
-					} else
+					} else {
 						min = ent;
+					}
 				}
 			}
 
@@ -59,7 +59,7 @@ namespace life_simulator.Render {
 		}
 
 		public bool IsCellEmpty(Vector2 Coords) {
-			Cell? result = GetCellOrNull(Coords);
+			Cell? result = this.GetCellOrNull(Coords);
 			if (result == null) {
 				return true;
 			}
@@ -72,50 +72,51 @@ namespace life_simulator.Render {
 			pos.X = (float)Math.Truncate(pos.X);
 			pos.Y = (float)Math.Truncate(pos.Y);
 
-			if (pos.X < 0 || pos.Y < 0 || pos.Y >= Size.X || pos.X >= Size.X)
+			if (pos.X < 0 || pos.Y < 0 || pos.Y >= this.Size.X || pos.X >= this.Size.X) {
 				return null;
+			}
 
-			return Cells[(uint)pos.X, (uint)pos.Y];
+			return this.Cells[(uint)pos.X, (uint)pos.Y];
 		}
 
 		public void AddTickEnt(Entity ent) {
-			EntsTick.Add(ent);
+			this.EntsTick.Add(ent);
 		}
 
 		public void RemoveTickEnt(Entity ent) {
-			EntsRemove.Add(ent);
+			this.EntsRemove.Add(ent);
 		}
 
 		public void AddTickTimer(TickTimer tmr) {
-			TimersTick.Add(tmr);
+			this.TimersTick.Add(tmr);
 		}
 
 		public void RemoveTickTimer(TickTimer tmr) {
-			TimersRemove.Add(tmr);
+			this.TimersRemove.Add(tmr);
 		}
-		
+
 		public void RemoveOldTimer() {
-			foreach (TickTimer tmr in TimersRemove) {
-				TimersTick.Remove(tmr);
+			foreach (TickTimer tmr in this.TimersRemove) {
+				this.TimersTick.Remove(tmr);
 			}
 
-			TimersRemove.Clear();
+			this.TimersRemove.Clear();
 		}
 
 		public void TickTimers() {
-			foreach (TickTimer tmr in TimersTick) {
+			foreach (TickTimer tmr in this.TimersTick) {
 				tmr.Tick();
 			}
 		}
 
 		public void RemoveOldEnts() {
-			foreach (Entity ent in EntsRemove) {
-				EntsTick.Remove(ent);
+			foreach (Entity ent in this.EntsRemove) {
+				this.EntsTick.Remove(ent);
 
 				this.SetEntityCellPos(ent, ent.GetPos(), null);
 			}
 
-			EntsRemove.Clear();
+			this.EntsRemove.Clear();
 		}
 	}
 }

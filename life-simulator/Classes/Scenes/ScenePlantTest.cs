@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Numerics;
-using life_simulator.Render;
-using life_simulator.Classes;
-using System.Drawing;
+﻿using life_simulator.Classes;
 using life_simulator.Plants;
+using life_simulator.Render;
+using System;
+using System.Drawing;
+using System.Numerics;
 
 namespace life_simulator {
 	class ScenePlantTest : Scene {
-
-		Random random = new Random();
-		private static double ToRadians(double angle) {
-			return (Math.PI / 180) * angle;
-		}
+		readonly Random random = new();
 
 		public ScenePlantTest(World world) : base(world) {
 			EntityRender entR = new();
@@ -36,18 +28,15 @@ namespace life_simulator {
 			test1.SetPos(new(1f, 1f));
 			test2.SetPos(new(2f, 2f));
 			test3.SetPos(new(3f, 3f));
-
-			//test1.setVel(new Vector2(0.1f, 0.1f));
-
+			
 			TickTimer tmr = new(world, (uint ticks) => {
 				Vector2 spawnPosition = new(
-					(float)Math.Round(random.NextDouble() * World.Size.X),
-					(float)Math.Round(random.NextDouble() * World.Size.Y)
+					(float)Math.Round(this.random.NextDouble() * this.World.Size.X),
+					(float)Math.Round(this.random.NextDouble() * this.World.Size.Y)
 				);
-				if (World.IsCellEmpty(spawnPosition)) {
+
+				if (this.World.IsCellEmpty(spawnPosition))
 					(new Plant(world)).SetPos(spawnPosition);
-				}
-				//Console.WriteLine(test1.getPos());
 			}, 60, 0);
 		}
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Numerics;
+﻿using life_simulator.Classes;
 using life_simulator.Render;
-using life_simulator.Classes;
+using System;
 using System.Drawing;
+using System.Numerics;
 
 namespace life_simulator {
 	class SceneRenderTest : Scene {
