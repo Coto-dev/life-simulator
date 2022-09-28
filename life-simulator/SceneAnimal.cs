@@ -48,7 +48,13 @@ namespace life_simulator {
 
 				if (World.IsCellEmpty(spawnPosition)) 
 					(new Plant(world)).SetPos(spawnPosition);
-				
+
+					(new Predator(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
+					(float)Math.Round(random.NextDouble() * World.Size.Y)));
+				(new Herbivorous(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
+				(float)Math.Round(random.NextDouble() * World.Size.Y)));
+				(new Herbivorous(world)).SetPos(new Vector2((float)Math.Round(random.NextDouble() * World.Size.X),
+				(float)Math.Round(random.NextDouble() * World.Size.Y)));
 			}, 60, 0);
 
 		}

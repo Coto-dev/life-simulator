@@ -16,7 +16,6 @@ namespace life_simulator.Classes.Animal {
 		}
 		public override void Tick() {
 			base.Tick();
-
 			Satiety-- ;
 
 			if (Hp == 0) 

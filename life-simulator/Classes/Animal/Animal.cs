@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using life_simulator.Render;
 using life_simulator.Plants;
+using System.Diagnostics;
 
 namespace life_simulator.Classes.Animal {
 
@@ -35,11 +36,23 @@ namespace life_simulator.Classes.Animal {
 				
 			float x = target.GetPos().X - GetPos().X;
 			float y = target.GetPos().Y - GetPos().Y;
-			SetVel(new Vector2((float)x / 20, (float)y / 20));
-
+			//SetVel(new Vector2((float)x / 20, (float)y / 20));
+		Vector2 vec = new Vector2((float)x , (float)y);
+		SetVel(new Vector2(vec.X / vec.Length() / 30, vec.Y/ vec.Length() / 30));
 			if (Math.Abs(target.GetPos().X - chaser.GetPos().X) < eps && Math.Abs(target.GetPos().Y - chaser.GetPos().Y) < eps) {
-				target.Remove();
-				Eat();	
+				if (target is Plant) {
+					if (((Plant)target).isGrown == true) {
+						target.Remove();
+						Eat();
+					} else
+						return;	
+				} 
+				else {
+					target.Remove();
+					Eat();
+				}
+				/*target.Remove();
+				Eat();*/
 			}
 		}
 		public bool IsHungry() {
@@ -47,7 +60,7 @@ namespace life_simulator.Classes.Animal {
 			else return true;
         }
         public void Move() {
-			if (Ticks % 10 == 0) {
+			if (Ticks % 20 == 0) {
 				Random rnd = new Random();
 				switch (rnd.Next(0, 4)) {
 					case 0:
