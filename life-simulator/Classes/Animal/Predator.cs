@@ -31,8 +31,6 @@ namespace life_simulator.Classes.Animal {
 					Hp++;
 				Move();
 			}
-				
-			
-		}	
+		}		
 	}
 }

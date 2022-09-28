@@ -72,8 +72,10 @@ namespace life_simulator.Classes.Animal
 			}
 		}
 
-        public void Pair<T>(T partner){
-        }
+
+		public void Pair<T>(T partner) {
+
+		}
 		public void Eat() {
 			Satiety = 100;
 		}

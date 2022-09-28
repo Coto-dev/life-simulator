@@ -8,6 +8,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>disable</ImplicitUsings>
     <StartupObject></StartupObject>
+    <StartupObject>life_simulator.Program</StartupObject>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <ApplicationIcon />
   </PropertyGroup>
