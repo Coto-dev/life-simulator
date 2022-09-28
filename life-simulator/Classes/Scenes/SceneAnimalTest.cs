@@ -5,7 +5,7 @@ using System;
 using System.Numerics;
 
 namespace life_simulator {
-	class SceneAnimal : Scene {
+	class SceneAnimalTest : Scene {
 		readonly Random random = new();
 
 		private void RandomSpawnPredator(World world) {
@@ -33,7 +33,7 @@ namespace life_simulator {
 				(new Plant(world)).SetPos(spawnPosition);
 		}
 
-		public SceneAnimal(World world) : base(world) {
+		public SceneAnimalTest(World world) : base(world) {
 
 
 			Predator predator1 = new(world);
@@ -67,7 +67,7 @@ namespace life_simulator {
 
 		}
 
-		public new static SceneAnimal Create(World world) {
+		public new static SceneAnimalTest Create(World world) {
 			return new SceneAnimal(world);
 		}
 	}

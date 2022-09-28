@@ -50,8 +50,8 @@ namespace life_simulator {
 			this.MaximizeBox = false;
 
 
-			SceneAnimal.Create(this.World);
-
+			SceneAnimalTest.Create(this.World);
+			//SceneRenderTest.Create(this.World);
 			//ScenePlantTest.Create(World);
 
 
@@ -61,9 +61,5 @@ namespace life_simulator {
 		[DllImport("kernel32.dll", SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		static extern bool AllocConsole();
-
-		private void Form1_Load(object sender, EventArgs e) {
-
-		}
 	}
 }
