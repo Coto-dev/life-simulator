@@ -1,4 +1,5 @@
 ﻿using life_simulator.Render;
+using life_simulator.Plants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,21 @@ namespace life_simulator.Classes.Animal {
 		}
 		public override void Tick() {
 			base.Tick();
-			Move();
+
+			Satiety-- ;
+
+			if (Hp == 0) 
+				Die();
+			
+			if (IsHungry()) {
+				Hp--;
+				Chase<Plant>(this);
+			} 
+			else {
+				if (Hp < MaxHp) 
+					Hp++;
+				Move();
+			}
 		}
 		
 	}

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Numerics;
 using life_simulator.Render;
 using life_simulator.Classes;
+using life_simulator.Plants;
 using life_simulator.Classes.Animal;
 using System.Drawing;
 
@@ -17,6 +18,7 @@ namespace life_simulator {
 		}
 
 		public SceneAnimal(World world) : base(world) {
+			Random random = new Random();
 
 			Predator predator1 = new Predator(world);
 			Predator predator2 = new Predator(world);
@@ -37,6 +39,17 @@ namespace life_simulator {
 			herbivorous3.SetPos(new Vector2(2.7f, 4.5f));
 			herbivorous4.SetPos(new Vector2(5.7f, 3.5f));
 			herbivorous5.SetPos(new Vector2(4.7f, 3.5f));
+
+			TickTimer tmr = new(world, (uint ticks) => {
+				Vector2 spawnPosition = new(
+					(float)Math.Round(random.NextDouble() * World.Size.X),
+					(float)Math.Round(random.NextDouble() * World.Size.Y)
+				);
+
+				if (World.IsCellEmpty(spawnPosition)) 
+					(new Plant(world)).SetPos(spawnPosition);
+				
+			}, 60, 0);
 
 		}
 

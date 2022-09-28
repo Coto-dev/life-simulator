@@ -5,22 +5,20 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using life_simulator.Render;
+using life_simulator.Plants;
 
-namespace life_simulator.Classes.Animal
-{
+namespace life_simulator.Classes.Animal {
 
-    abstract class Animal : Entity, IAlive
-    {
+    abstract class Animal : Entity, IAlive {
 		protected int MaxHp;
 		protected int Hp;
 		protected int Satiety;
-		protected int LifeTicks;
 		protected object? sex;
+
 		public Animal(World world) : base(world) {
 			MaxHp = 200;
 			Satiety = 150;
 			Hp = 200;
-			LifeTicks = 0;
 		}
 		public void Die() {
 			Remove();
@@ -49,8 +47,7 @@ namespace life_simulator.Classes.Animal
 			else return true;
         }
         public void Move() {
-			LifeTicks++;
-			if (LifeTicks % 10 == 0) {
+			if (Ticks % 10 == 0) {
 				Random rnd = new Random();
 				switch (rnd.Next(0, 4)) {
 					case 0:

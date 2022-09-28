@@ -28,7 +28,6 @@ namespace life_simulator.Plants
 			base.Tick();
 			if (Ticks == random) {
 				grow();
-				Console.WriteLine(Ticks);
 			}
 		}
 
