@@ -9,24 +9,30 @@ using System.Numerics;
 
 namespace life_simulator.Classes.Animal {
 	internal class Predator : Animal {
+		public Predator(World world) : base(world) {
+			Render.SetSvg("assets/svg/Predator.svg");
+			Render.SetColor(Color.Orange);
+			Render.Rerender();
+		}
 		public override void Tick() {
 			base.Tick();
+
+			Satiety-- ;
+
+			if (Hp == 0) 
+				Die();
 			
 			if (IsHungry()) {
+				Hp--;
 				Chase<Herbivorous>(this);
-
-			} else
+			} 
+			else {
+				if (Hp < MaxHp) 
+					Hp++;
 				Move();
-			Satiety -= 10;
-
-			//Console.WriteLine(World.FindFirstEnt<Herbivorous>(this).GetPos());
-
-			//Chase<Herbivorous>(this);
-		}
-		public Predator(World world) : base(world) {
-			Render.SetSvg("assets/svg/Black_Paw.svg");
-			Render.Rerender();
-			//World.EntsTick.Add(new Predator());
-		}
+			}
+				
+			
+		}	
 	}
 }
