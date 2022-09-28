@@ -24,7 +24,7 @@ namespace life_simulator.Classes {
 
 			Render.SetColor(Color.FromArgb(unchecked((int)0xffff0000)));
 			Render.SetSize(World.GridSize / 2);
-			Render.SetSvg("assets/svg/FlagRussia.svg");
+			Render.SetSvg("assets/svg/Debug.svg");
 			Render.Rerender();
 		}
 

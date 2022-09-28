@@ -24,7 +24,7 @@ namespace life_simulator {
 
 			entR.SetColor(Color.FromArgb(unchecked((int)0xffffffff)));
 			entR.SetSize(test1.Render.GetSize());
-			entR.SetSvg("assets/svg/Basketball.svg");
+			entR.SetSvg("assets/svg/Black_Paw.svg");
 			entR.Rerender();
 
 			test2.Render.SetEntityRender(entR);
