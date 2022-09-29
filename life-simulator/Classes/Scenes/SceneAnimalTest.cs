@@ -68,7 +68,7 @@ namespace life_simulator {
 		}
 
 		public new static SceneAnimalTest Create(World world) {
-			return new SceneAnimal(world);
+			return new SceneAnimalTest(world);
 		}
 	}
 }
