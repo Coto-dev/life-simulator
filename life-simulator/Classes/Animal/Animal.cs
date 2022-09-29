@@ -13,8 +13,6 @@ namespace life_simulator.Classes.Animal {
 		protected int MinSatiety;
 		protected int Satiety;
 		protected float SpeedCoof;
-		protected ESex? Sex;
-
 		protected Animal(World world) : base(world) {
 			this.MaxHp = 200;
 			this.Hp = 200;
@@ -22,7 +20,6 @@ namespace life_simulator.Classes.Animal {
 			this.MinSatiety = 50;
 			this.Satiety = 150;
 			this.SpeedCoof = 30;
-			this.Sex = ESex.NONE;
 		}
 
 		public void Live<T1, T2>() {
@@ -94,10 +91,6 @@ namespace life_simulator.Classes.Animal {
 
 		public void Eat() {
 			this.Satiety = this.MaxSatiety;
-		}
-
-		public void Intercourse<T>(T partner) {
-
 		}
 	}
 }

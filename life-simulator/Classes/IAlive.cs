@@ -3,7 +3,6 @@
 	void Move();
 	void Eat();
 	bool IsHungry();
-	void Intercourse<T>(T partner);
 	void Die();
 	void Chase<T1, T2>();
 }
