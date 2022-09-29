@@ -1,5 +1,4 @@
-﻿using life_simulator.Enumerations;
-using life_simulator.Plants;
+﻿using life_simulator.Plants;
 using life_simulator.Render;
 using System;
 using System.Numerics;
