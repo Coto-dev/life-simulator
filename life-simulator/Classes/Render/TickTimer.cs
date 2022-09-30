@@ -2,12 +2,12 @@
 
 namespace life_simulator.Render {
 	public class TickTimer {
-		public uint TicksCount = 0;
-		public uint Ticks = 0;
-		public uint TickItr;
-		public uint Repeat;
-		public World World;
-		public Action<uint> Cb;
+		private uint TicksCount = 0;
+		private uint Ticks = 0;
+		private uint TickItr;
+		private uint Repeat;
+		private World World;
+		private Action<uint> Cb;
 
 		public TickTimer(World world, Action<uint> cb, uint tick, uint repeat) {
 			this.Cb = cb;
