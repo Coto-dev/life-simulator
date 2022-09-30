@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace life_simulator.Render {
 	public class Render {
-		public World World;
+		private World World;
 
 		public Render(World world) {
 			this.World = world;

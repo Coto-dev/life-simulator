@@ -7,7 +7,7 @@ namespace life_simulator.Plants {
 	public class Plant : Entity {
 		public bool isEdible;
 		public bool isGrown;
-		public int random;
+		private int random;
 		readonly Random rnd = new();
 
 		public Plant(World world) : base(world) {
